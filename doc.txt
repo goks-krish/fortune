@@ -1,0 +1,5 @@
+Checkstyle Report
+mvn site
+
+Checkstyle Goal
+mvn checkstyle:checkstyle
