@@ -7,15 +7,15 @@ public class Schedule {
 	private long id;
 
     @Length(max = 3)
-    private String content;
+    private String schedule;
 
     public Schedule() {
         // Jackson deserialization
     }
 
-    public Schedule(long id, String content) {
+    public Schedule(long id, String schedule) {
         this.id = id;
-        this.content = content;
+        this.schedule = schedule;
     }
 
     @JsonProperty
@@ -24,7 +24,7 @@ public class Schedule {
     }
 
     @JsonProperty
-    public String getContent() {
-        return content;
+    public String getSchedule() {
+        return schedule;
     }
 }

@@ -22,7 +22,7 @@
         <dropwizard.version>1.0.5</dropwizard.version>
         <mainClass>com.goks.fortune.ServerApp</mainClass>
     </properties>
-
+    
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -40,6 +40,11 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
         </dependency>
+        <dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-compiler</artifactId>
+			<version>6.2.0.Final</version>
+		</dependency>
     </dependencies>
 
     <build>

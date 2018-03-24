@@ -1,0 +1,27 @@
+import com.goks.fortune.model.Employee;
+import com.goks.fortune.model.SupportDay;
+
+rule "Not on Same Day"
+	when 
+		employee: Employee()
+		supportDay: SupportDay(today==employee.getPreviousShiftDate())
+	then
+		supportDay.setComplete(false);
+	end
+
+rule "Not on Previous Day"
+	when 
+		employee: Employee()
+		supportDay: SupportDay(yesterday==employee.getPreviousShiftDate())
+	then
+		supportDay.setComplete(false);
+	end
+	
+rule "Rotate All Employees"
+	when 
+		employee: Employee()
+		supportDay: SupportDay(((id+1) * 2) <= (employee.getTotalShifts() * totalEmployeeCount))
+	then
+		supportDay.setComplete(false);
+	end
+	
