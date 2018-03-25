@@ -34,13 +34,21 @@ public class ScheduleResource {
 
     @GET
     @Timed
-    public Schedule sendSchedule(@QueryParam("name") Optional<String> name) {
+    public Schedule sendSchedule(
+    		@QueryParam("employeeCount") int totalEmployees,
+    		@QueryParam("totalDays") int totalDays,
+    		@QueryParam("random") Optional<Boolean> random) {
         //final String value = String.format(template, name.orElse(defaultName));
     	DailySchedule[] value = null;
 		try {
-			value = droolsEngine.executeDrools(10, 14, false);
+			if(totalEmployees<=0) {
+				totalEmployees = 10;
+			}
+			if(totalDays<=0) {
+				totalDays = 14;
+			}
+			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent());
 		} catch (DroolsParserException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return new Schedule(util.getHostName()+" - "+counter.incrementAndGet(), value);
