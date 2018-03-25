@@ -1,8 +1,7 @@
 package com.goks.fortune.drools;
 
+import java.net.InetAddress;
 import java.io.IOException;
-
-import org.drools.compiler.compiler.DroolsParserException;
 
 public class Test {
 	
@@ -11,15 +10,20 @@ public class Test {
 	static boolean random = true;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		String hostname = "Unknown";
+
 		System.out.println("HELLO");
 		DroolsEngine dl = new DroolsEngineImpl();
 		try {
-			System.out.println(dl.executeDrools(totalEmployees, totalDays, random));
+//			System.out.println(dl.executeDrools(totalEmployees, totalDays, random));
+			InetAddress addr;
+		    addr = InetAddress.getLocalHost();
+		    hostname = addr.getHostName();
+		    System.out.println(hostname);
 		}  catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (DroolsParserException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

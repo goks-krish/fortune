@@ -14,6 +14,7 @@ import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import com.goks.fortune.model.DailySchedule;
 import com.goks.fortune.model.Employee;
 import com.goks.fortune.model.SupportDay;
 
@@ -22,8 +23,7 @@ public class DroolsEngineImpl implements DroolsEngine {
 	String[] employeeNames = {"Tom","Adam", "Evan", "Adit", "Glen","Sara","Arjun","Raja","Max","Krish"};
 
 	@Override
-	public String executeDrools(int totalEmployees, int totalDays, boolean random) throws DroolsParserException, IOException  {
-		String schedule = "";
+	public DailySchedule[] executeDrools(int totalEmployees, int totalDays, boolean random) throws DroolsParserException, IOException  {
         KieServices kieServices = KieServices.Factory.get();
         Resource resource = kieServices.getResources().newFileSystemResource("rules.drl");
         
@@ -86,15 +86,20 @@ public class DroolsEngineImpl implements DroolsEngine {
 			employees[supportDays[i].getLastShiftEmpId()].setTotalShifts(employees[supportDays[i].getLastShiftEmpId()].getTotalShifts()+1);
 		}
 		
-/*		for(int i=0;i<supportDays.length;i++) {
-			ObjectNode daySchedule = mapper.createObjectNode();
-			daySchedule.put("Date: ", supportDays[i].getToday());
-			daySchedule.put("FirstShift: ", supportDays[i].getFirstShiftEmpId()+ " - " + employees[supportDays[i].getFirstShiftEmpId()].getName());
-			daySchedule.put("LastShift: ", supportDays[i].getLastShiftEmpId()+ " - " + employees[supportDays[i].getLastShiftEmpId()].getName());
-	        schedule.add(daySchedule);
-		}*/
-		schedule = "schedule goes here = " + supportDays[0].getFirstShiftEmpId() ;
-		return schedule;
+		//DailySchedule dailySchedule = new DailySchedule();
+		
+		DailySchedule[] scheduleList = new DailySchedule[supportDays.length];
+		
+		for(int i=0;i<supportDays.length;i++) {
+			DailySchedule sch = new DailySchedule();
+			sch.setDate(supportDays[i].getToday());
+			sch.setFirstShift(supportDays[i].getFirstShiftEmpId()+ " - " + employees[supportDays[i].getFirstShiftEmpId()].getName());
+			sch.setLastShift(supportDays[i].getLastShiftEmpId()+ " - " + employees[supportDays[i].getLastShiftEmpId()].getName());
+			scheduleList[i] = sch;
+		}
+		
+		//dailySchedule.setSchedules(scheduleList);
+		return scheduleList;
 	}
     
 	private Integer[] randomGenerator(int max, boolean random) {
