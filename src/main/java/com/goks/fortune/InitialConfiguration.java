@@ -4,30 +4,47 @@ import io.dropwizard.Configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * @author Gokul
+ *
+ */
 public class InitialConfiguration extends Configuration {
+	/**
+	 * Template data.
+	 */
 	@NotEmpty
 	private String template;
-
+	/**
+	 * Default name.
+	 */
 	@NotEmpty
 	private String defaultName = "Stranger";
-
+	/**
+	 * @return template data.
+	 */
 	@JsonProperty
-	public String getTemplate() {
+	public final String getTemplate() {
 		return template;
 	}
-
+	/**
+	 * @param templateData info
+	 */
 	@JsonProperty
-	public void setTemplate(String template) {
-		this.template = template;
+	public final void setTemplate(final String templateData) {
+		this.template = templateData;
 	}
-
+	/**
+	 * @return default name data.
+	 */
 	@JsonProperty
-	public String getDefaultName() {
+	public final String getDefaultName() {
 		return defaultName;
 	}
-
+	/**
+	 * @param nameData info.
+	 */
 	@JsonProperty
-	public void setDefaultName(String name) {
-		this.defaultName = name;
+	public final void setDefaultName(final String nameData) {
+		this.defaultName = nameData;
 	}
 }

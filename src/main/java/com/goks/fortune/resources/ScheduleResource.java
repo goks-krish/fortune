@@ -21,32 +21,68 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * @author Gokul
+ *
+ */
 @Path("/schedule")
 @Produces(MediaType.APPLICATION_JSON)
 public class ScheduleResource {
+	/**
+	 * Counter for number of requests.
+	 */
 	private final AtomicLong counter;
+	/**
+	 * Variable to call utility.
+	 */
 	private final Utility util;
-	DroolsEngine droolsEngine;
+	/**
+	 * Variable to call DroolsEngine.
+	 */
+	private final DroolsEngine droolsEngine;
 
-	public ScheduleResource(String template, String defaultName) {
+	/**
+	 * Default number of employees.
+	 */
+	public static final int DEFAULT_EMPLOYEES = 10;
+	/**
+	 * Default number of days.
+	 */
+	public static final int DEFAULT_DAYS = 14;
+	/**
+	 * @param template Default template data.
+	 * @param defaultName Default Name data.
+	 */
+	public ScheduleResource(final String template,
+		final String defaultName) {
 		this.counter = new AtomicLong();
 		this.droolsEngine = new DroolsEngineImpl();
 		this.util = new Utility();
 	}
 
+	/**
+	 * @param totalEmployees Upper limit for employees.
+	 * @param totalDays Upper limit for days.
+	 * @param random with true or false for random.
+	 * @param rules with rules data.
+	 * @return schedule array for final schedule.
+	 */
 	@GET
 	@Timed
-	public Schedule sendSchedule(@QueryParam("employeeCount") int totalEmployees,
-			@QueryParam("totalDays") int totalDays, @QueryParam("random") Optional<Boolean> random,
-			@QueryParam("rules") String rules) {
-		// final String value = String.format(template, name.orElse(defaultName));
+	public final Schedule sendSchedule(
+		@QueryParam("employeeCount") final int totalEmployees,
+		@QueryParam("totalDays") final int totalDays,
+		@QueryParam("random") final Optional<Boolean> random,
+		@QueryParam("rules") final String rules) {
 		DailySchedule[] value = null;
 		try {
-			if (totalEmployees <= 0) {
-				totalEmployees = 10;
+		    	int empTotal = totalEmployees;
+		    	int dayTotal = totalDays;
+			if (empTotal <= 0) {
+			    empTotal = DEFAULT_EMPLOYEES;
 			}
-			if (totalDays <= 0) {
-				totalDays = 14;
+			if (dayTotal <= 0) {
+			    dayTotal = DEFAULT_DAYS;
 			}
 			String rulesFile = "rules.drl";
 
@@ -58,10 +94,12 @@ public class ScheduleResource {
 				fw.close();
 			}
 
-			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent(), rulesFile);
+			value = droolsEngine.executeDrools(empTotal,
+				dayTotal, random.isPresent(), rulesFile);
 		} catch (DroolsParserException | IOException e) {
 			e.printStackTrace();
 		}
-		return new Schedule(util.getHostName() + " - " + counter.incrementAndGet(), value);
+		return new Schedule(util.getHostName() + " - "
+		+ counter.incrementAndGet(), value);
 	}
 }
