@@ -24,47 +24,44 @@ import java.util.Optional;
 @Path("/schedule")
 @Produces(MediaType.APPLICATION_JSON)
 public class ScheduleResource {
-    private final AtomicLong counter;
-    private final Utility util;
-    DroolsEngine droolsEngine;
+	private final AtomicLong counter;
+	private final Utility util;
+	DroolsEngine droolsEngine;
 
-    public ScheduleResource(String template, String defaultName) {
-        this.counter = new AtomicLong();
-        this.droolsEngine = new DroolsEngineImpl();
-        this.util = new Utility();
-    }
+	public ScheduleResource(String template, String defaultName) {
+		this.counter = new AtomicLong();
+		this.droolsEngine = new DroolsEngineImpl();
+		this.util = new Utility();
+	}
 
-    @GET
-    @Timed
-    public Schedule sendSchedule(
-    		@QueryParam("employeeCount") int totalEmployees,
-    		@QueryParam("totalDays") int totalDays,
-    		@QueryParam("random") Optional<Boolean> random,
-    		@QueryParam("rules") String rules
-    		) {
-        //final String value = String.format(template, name.orElse(defaultName));
-    	DailySchedule[] value = null;
+	@GET
+	@Timed
+	public Schedule sendSchedule(@QueryParam("employeeCount") int totalEmployees,
+			@QueryParam("totalDays") int totalDays, @QueryParam("random") Optional<Boolean> random,
+			@QueryParam("rules") String rules) {
+		// final String value = String.format(template, name.orElse(defaultName));
+		DailySchedule[] value = null;
 		try {
-			if(totalEmployees<=0) {
+			if (totalEmployees <= 0) {
 				totalEmployees = 10;
 			}
-			if(totalDays<=0) {
+			if (totalDays <= 0) {
 				totalDays = 14;
 			}
 			String rulesFile = "rules.drl";
-			
-			if(rules!=null && rules.toString().length()!=0){
+
+			if (rules != null && rules.toString().length() != 0) {
 				rulesFile = "rules-temp.drl";
 				File newTextFile = new File(rulesFile);
-	            FileWriter fw = new FileWriter(newTextFile);
-	            fw.write(rules);
-	            fw.close();
+				FileWriter fw = new FileWriter(newTextFile);
+				fw.write(rules);
+				fw.close();
 			}
-			
-			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent(),rulesFile);
+
+			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent(), rulesFile);
 		} catch (DroolsParserException | IOException e) {
 			e.printStackTrace();
 		}
-        return new Schedule(util.getHostName()+" - "+counter.incrementAndGet(), value);
-    }
+		return new Schedule(util.getHostName() + " - " + counter.incrementAndGet(), value);
+	}
 }
