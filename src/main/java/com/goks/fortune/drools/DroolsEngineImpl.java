@@ -23,9 +23,10 @@ public class DroolsEngineImpl implements DroolsEngine {
 	String[] employeeNames = {"Tom","Adam", "Evan", "Adit", "Glen","Sara","Arjun","Raja","Max","Krish"};
 
 	@Override
-	public DailySchedule[] executeDrools(int totalEmployees, int totalDays, boolean random) throws DroolsParserException, IOException  {
+	public DailySchedule[] executeDrools(int totalEmployees, int totalDays, 
+			boolean random, String rulesFile) throws DroolsParserException, IOException  {
         KieServices kieServices = KieServices.Factory.get();
-        Resource resource = kieServices.getResources().newFileSystemResource("rules.drl");
+        Resource resource = kieServices.getResources().newFileSystemResource(rulesFile);
         
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         kieFileSystem.write(resource);

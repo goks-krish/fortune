@@ -16,6 +16,8 @@ import javax.ws.rs.core.MediaType;
 import org.drools.compiler.compiler.DroolsParserException;
 
 import java.util.concurrent.atomic.AtomicLong;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -37,7 +39,9 @@ public class ScheduleResource {
     public Schedule sendSchedule(
     		@QueryParam("employeeCount") int totalEmployees,
     		@QueryParam("totalDays") int totalDays,
-    		@QueryParam("random") Optional<Boolean> random) {
+    		@QueryParam("random") Optional<Boolean> random,
+    		@QueryParam("rules") String rules
+    		) {
         //final String value = String.format(template, name.orElse(defaultName));
     	DailySchedule[] value = null;
 		try {
@@ -47,7 +51,17 @@ public class ScheduleResource {
 			if(totalDays<=0) {
 				totalDays = 14;
 			}
-			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent());
+			String rulesFile = "rules.drl";
+			
+			if(rules!=null && rules.toString().length()!=0){
+				rulesFile = "rules-temp.drl";
+				File newTextFile = new File(rulesFile);
+	            FileWriter fw = new FileWriter(newTextFile);
+	            fw.write(rules);
+	            fw.close();
+			}
+			
+			value = droolsEngine.executeDrools(totalEmployees, totalDays, random.isPresent(),rulesFile);
 		} catch (DroolsParserException | IOException e) {
 			e.printStackTrace();
 		}
