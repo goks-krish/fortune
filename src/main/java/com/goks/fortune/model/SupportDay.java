@@ -1,69 +1,136 @@
 package com.goks.fortune.model;
 
+/**
+ * @author Gokul
+ *
+ */
 public class SupportDay {
 
+	/**
+	 * Id of the day.
+	 */
 	private int id;
+	/**
+	 * Today date.
+	 */
 	private String today;
+	/**
+	 * Yesterday date.
+	 */
 	private String yesterday;
+	/**
+	 * First shift employee id.
+	 */
 	private int firstShiftEmpId;
+	/**
+	 * Last shift employee id.
+	 */
 	private int lastShiftEmpId;
+	/**
+	 * Total employee count.
+	 */
 	private int totalEmployeeCount;
+	/**
+	 * Verify if the allotment is valid.
+	 */
 	private boolean complete;
 
-	public String getToday() {
+	/**
+	 * @return today date.
+	 */
+	public final String getToday() {
 		return today;
 	}
 
-	public void setToday(String today) {
-		this.today = today;
+	/**
+	 * @param todayDate as today date.
+	 */
+	public final void setToday(final String todayDate) {
+		this.today = todayDate;
 	}
 
-	public int getFirstShiftEmpId() {
+	/**
+	 * @return first shift employee id.
+	 */
+	public final int getFirstShiftEmpId() {
 		return firstShiftEmpId;
 	}
 
-	public void setFirstShiftEmpId(int firstShiftEmpId) {
-		this.firstShiftEmpId = firstShiftEmpId;
+	/**
+	 * @param firstShiftEId employee of first shift.
+	 */
+	public final void setFirstShiftEmpId(final int firstShiftEId) {
+		this.firstShiftEmpId = firstShiftEId;
 	}
 
-	public int getLastShiftEmpId() {
+	/**
+	 * @return last shift employee.
+	 */
+	public final int getLastShiftEmpId() {
 		return lastShiftEmpId;
 	}
 
-	public void setLastShiftEmpId(int lastShiftEmpId) {
-		this.lastShiftEmpId = lastShiftEmpId;
+	/**
+	 * @param lastShiftEId of employee.
+	 */
+	public final void setLastShiftEmpId(final int lastShiftEId) {
+		this.lastShiftEmpId = lastShiftEId;
 	}
 
-	public int getId() {
+	/**
+	 * @return id of day.
+	 */
+	public final int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	/**
+	 * @param idNo of Day.
+	 */
+	public final void setId(final int idNo) {
+		this.id = idNo;
 	}
 
-	public String getYesterday() {
+	/**
+	 * @return previous day date.
+	 */
+	public final String getYesterday() {
 		return yesterday;
 	}
 
-	public void setYesterday(String yesterday) {
-		this.yesterday = yesterday;
+	/**
+	 * @param yesterdayDate of previous day.
+	 */
+	public final void setYesterday(final String yesterdayDate) {
+		this.yesterday = yesterdayDate;
 	}
 
-	public int getTotalEmployeeCount() {
+	/**
+	 * @return total employee count.
+	 */
+	public final int getTotalEmployeeCount() {
 		return totalEmployeeCount;
 	}
 
-	public void setTotalEmployeeCount(int totalEmployeeCount) {
-		this.totalEmployeeCount = totalEmployeeCount;
+	/**
+	 * @param totalEmp count.
+	 */
+	public final void setTotalEmployeeCount(final int totalEmp) {
+		this.totalEmployeeCount = totalEmp;
 	}
 
-	public boolean isComplete() {
+	/**
+	 * @return completed or not.
+	 */
+	public final boolean isComplete() {
 		return complete;
 	}
 
-	public void setComplete(boolean complete) {
-		this.complete = complete;
+	/**
+	 * @param completed verified or not.
+	 */
+	public final void setComplete(final boolean completed) {
+		this.complete = completed;
 	}
 
 }

@@ -1,42 +1,81 @@
 package com.goks.fortune.model;
 
+/**
+ * @author Gokul
+ *
+ */
 public class Employee {
 
+	/**
+	 * Id of the Employee.
+	 */
 	private int id;
+	/**
+	 * Name of the Employee.
+	 */
 	private String name;
+	/**
+	 * Previous shift day of the employee.
+	 */
 	private String previousShiftDate;
+	/**
+	 * Total number of shifts of the employee.
+	 */
 	private int totalShifts;
-
-	public int getId() {
+	/**
+	 * @return id of the employee.
+	 */
+	public final int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	/**
+	 * @param idEmp employee id.
+	 */
+	public final void setId(final int idEmp) {
+		this.id = idEmp;
 	}
 
-	public String getName() {
+	/**
+	 * @return name: Name of the employee.
+	 */
+	public final String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	/**
+	 * @param nameEmp Name of the employee.
+	 */
+	public final void setName(final String nameEmp) {
+		this.name = nameEmp;
 	}
 
-	public String getPreviousShiftDate() {
+	/**
+	 * @return previousShift date.
+	 */
+	public final String getPreviousShiftDate() {
 		return previousShiftDate;
 	}
 
-	public void setPreviousShiftDate(String previousShiftDate) {
-		this.previousShiftDate = previousShiftDate;
+	/**
+	 * @param prvShiftDate of employee
+	 */
+	public final void setPreviousShiftDate(final String prvShiftDate) {
+		this.previousShiftDate = prvShiftDate;
 	}
 
-	public int getTotalShifts() {
+	/**
+	 * @return total shifts of employee.
+	 */
+	public final int getTotalShifts() {
 		return totalShifts;
 	}
 
-	public void setTotalShifts(int totalShifts) {
-		this.totalShifts = totalShifts;
+	/**
+	 * @param totalShiftsEmp of employee.
+	 */
+	public final void setTotalShifts(final int totalShiftsEmp) {
+		this.totalShifts = totalShiftsEmp;
 	}
 
 }

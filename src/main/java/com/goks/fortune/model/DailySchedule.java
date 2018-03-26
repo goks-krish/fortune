@@ -1,32 +1,63 @@
 package com.goks.fortune.model;
 
+/**
+ * @author Gokul
+ *
+ */
 public class DailySchedule {
+	/**
+	 * Date of the day.
+	 */
 	private String date;
+	/**
+	 * Firstshift employee.
+	 */
 	private String firstShift;
+	/**
+	 * Last shift employee.
+	 */
 	private String lastShift;
 
-	public String getDate() {
+	/**
+	 * @return date of the target day.
+	 */
+	public final String getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	/**
+	 * @param dateToday for target day.
+	 */
+	public final void setDate(final String dateToday) {
+		this.date = dateToday;
 	}
 
-	public String getFirstShift() {
+	/**
+	 * @return firstshift employee id.
+	 */
+	public final String getFirstShift() {
 		return firstShift;
 	}
 
-	public void setFirstShift(String firstShift) {
-		this.firstShift = firstShift;
+	/**
+	 * @param firstShiftEmp id.
+	 */
+	public final void setFirstShift(final String firstShiftEmp) {
+		this.firstShift = firstShiftEmp;
 	}
 
-	public String getLastShift() {
+	/**
+	 * @return lastshift employee.
+	 */
+	public final String getLastShift() {
 		return lastShift;
 	}
 
-	public void setLastShift(String lastShift) {
-		this.lastShift = lastShift;
+	/**
+	 * @param lastShiftEmp id.
+	 */
+	public final void setLastShift(final String lastShiftEmp) {
+		this.lastShift = lastShiftEmp;
 	}
 
 }
